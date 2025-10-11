@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite"  thread-count="5">
+
+<!--<listeners>-->
+<!--        <listener class-name="netqa.com.listener.CustomTestListener"/>   Replace with your listener class -->
+<!--  </listeners>-->
+
+	
+	
+    
+      <parameter name="browser" value="chrome"></parameter>
+<!--      <parameter name="url" value="http://gbsmaltadqa.dev.sms.geduservices.com/login"></parameter>-->
+      <parameter name="url" value="http://qa-sms.geduservices.com/login"></parameter>
+
+	
+	
+  <test  name="Test">
+  
+  
+    <classes>
+    
+<!--    <class name="com.sms.PagebuilderLayer.PageBuilder"/>-->
+
+   
+<!--     <class name="com.sms.loginTestcaseScript.LoginTestCaseLayer"/>-->
+    
+      <class name="com.sms.PagebuilderTestCaseLayer.PageBuilderTestScript"/>
+
+
+       </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
