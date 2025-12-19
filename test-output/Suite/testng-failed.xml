@@ -11,8 +11,8 @@
           <include name="aftersuit"/>
           <include name="beforeTestTag"/>
           <include name="afterclass"/>
-          <include name="beforeSuite"/>
           <include name="aftermethod"/>
+          <include name="beforeSuite"/>
           <include name="beforemethod"/>
           <include name="afterTest"/>
           <include name="verifydefaultPropertyofTextfieldcomponent"/>

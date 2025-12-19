@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.sms.PagebuilderTestCaseLayer.Logger">
+      <class name="com.sms.PagebuilderTestCaseLayer.SoftAndHardAssert">
         <methods>
-          <include name="loginTest"/>
+          <include name="HardAssert"/>
         </methods>
-      </class> <!-- com.sms.PagebuilderTestCaseLayer.Logger -->
+      </class> <!-- com.sms.PagebuilderTestCaseLayer.SoftAndHardAssert -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

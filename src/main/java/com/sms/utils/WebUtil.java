@@ -83,10 +83,12 @@ import org.testng.Assert;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.epam.healenium.SelfHealingDriver;
 //import com.google.auto.common.BasicAnnotationProcessor.Step;
 import com.google.common.io.Files;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -94,7 +96,8 @@ import lombok.Setter;
 @Setter
 public class WebUtil {
 
-	private WebDriver driver; // null
+	private WebDriver delegate; // null
+	private SelfHealingDriver driver;
 	private Properties properties;
 	public WebDriver getDriver()
 	{
@@ -157,7 +160,8 @@ public class WebUtil {
 			//			Chrome driver instance
 			//System.setProperty("webdriver.chrome.driver", absolutePath);
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
+			delegate = new ChromeDriver(options);
+			 driver = SelfHealingDriver.create(delegate);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 			//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			//driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
@@ -166,13 +170,13 @@ public class WebUtil {
 
 		} else if (browsername.equalsIgnoreCase("firefox")) {
 			//System.setProperty("webdriver.gicko.driver", "driver//chromedriver.exe");
-			driver = new FirefoxDriver();
+			driver = (SelfHealingDriver) new FirefoxDriver();
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		}
 		else if (browsername.equalsIgnoreCase("edge")) {
 			//System.setProperty("webdriver.gicko.driver", "driver//chromedriver.exe");
-			driver = new EdgeDriver();
+			driver = (SelfHealingDriver) new EdgeDriver();
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		}
@@ -663,7 +667,21 @@ public class WebUtil {
 	//    This is get method by this we can hit the url of the application
 	public void hitUrl(String hiturl) {
 		driver.get(hiturl);
+		 waitForPageLoad(driver);
+			// printmethod("Page loaded completely!");
+			 System.out.println("Page loaded completely!");
 	}
+	
+	
+
+	public static void waitForPageLoad(WebDriver driver) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+	    wait.until(webDriver -> ((JavascriptExecutor) webDriver)
+	            .executeScript("return document.readyState").equals("complete"));
+	}
+	
+	
+	
 	//     This is send keys method by this way we can send the value in input box
 	public void mySendkeys(WebElement we, String inputvalue,String logicalname) {
 		//String elementname = we.getAccessibleName();
